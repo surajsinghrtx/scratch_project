@@ -10,17 +10,25 @@ const userSchema=mongoose.Schema({
     },
     email:String,
     password:String,
-    cart:{
-        type:Array,
-        default:[]
-    } ,
-    isadmin:boolean,
+                     // inside the user's cart we will insert the product( id of that product by the id we can find which product is that)
+    cart:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'product'
+    }],
+    
+    
     orders:{
         type:Array,
         default:[]
     },
-    constact:Number,
-    picture:String
+    reviews_on_product:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'review',
+        default:[]
+    }],
+             
+    contact:Number,
+    image:Buffer
 });
 
 module.exports=mongoose.model('user',userSchema);

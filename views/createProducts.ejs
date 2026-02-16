@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #ffffff;
+      color: #000;
+    }
+
+ .flash-success {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: #0725e8;
+  color: #b5b1b1;
+  padding: 12px 20px;
+  border: 1px solid #ffb3b3;
+  border-radius: 6px;
+
+  font-weight: 500;
+  z-index: 9999;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+    /* Top Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px;
+      border-bottom: 1px solid #dcdcdc;
+    }
+
+    .navbar h1 {
+      font-size: 28px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      margin-left: 28px;
+      text-decoration: none;
+      color: #000;
+      font-size: 15px;
+    }
+
+    /* Main Layout */
+    .container {
+      display: flex;
+      padding: 40px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      margin-right: 80px;
+    }
+
+    .sidebar p {
+      font-size: 14px;
+      margin-bottom: 14px;
+      color: #b0b0b0;
+    }
+
+    .sidebar a {
+      display: block;
+      font-size: 15px;
+      color: #000;
+      text-decoration: none;
+      margin-bottom: 10px;
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+    }
+
+    .content h2 {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #dcdcdc;
+      margin-bottom: 40px;
+      width: 100%;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    /* Product Image */
+    .image-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .image-row span {
+      font-size: 14px;
+      margin-right: 20px;
+    }
+
+    .file-btn {
+  background: #1e88ff;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  /* display: inline-block; */
+}
+
+.file-btn input {
+  display: none;
+  cursor: pointer;
+}
+
+.file-name {
+  margin-left: 12px;
+  font-size: 13px;
+  color: #555;
+}
+
+
+    /* Inputs */
+    .input {
+      background: #f1f1f1;
+      border: none;
+      padding: 14px;
+      font-size: 14px;
+      border-radius: 4px;
+      width: 420px;
+      margin-bottom: 18px;
+    }
+
+    .row {
+      display: flex;
+      gap: 18px;
+    }
+
+    .row .input {
+      width: 200px;
+    }
+
+    /* Panel Details */
+    .panel-section {
+      margin-top: 60px;
+    }
+
+    .panel-row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .panel-row .input {
+      width: 200px;
+    }
+    .btn {
+      margin-top: 15px;
+      background: #2f80ed;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <% if (success.length > 0) { %>
+  <div class="flash-success">
+    <%= success%>
+  </div>
+<% } %>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <h1>Admin Panel.</h1>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">Cart</a>
+      <a href="#">My account</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <p>All Products</p>
+      <a href="#">Create New Product</a>
+    </div>
+
+  
+    <!-- Page Content -->
+    <div class="content">
+      <h2>Create New Product</h2>
+        <form autocomplete="off" action="/products/create" method="post" enctype="multipart/form-data">
+      <div class="divider"></div>
+
+      <div class="section-title">Product Details</div>
+
+    <div class="image-row">
+  <span>Product Image</span>
+
+  <label class="file-btn">
+    Select File
+    <input type="file" name="productImage" onchange="showFileName(this)">
+  </label>
+
+  <span class="file-name">No file chosen</span>
+</div>
+
+
+
+      <input class="input" type="text" name="productName" placeholder="Product Name" />
+
+      <div class="row">
+        <input class="input" type="text" name="productPrice" placeholder="Product Price" />
+        <input class="input" type="text" name="productDiscount" placeholder="Discount Price" />
+      </div>
+
+      <div class="panel-section">
+        <div class="section-title">Panel Details</div>
+
+        <div class="panel-row">
+          <input class="input" type="text" name="bgcolor" placeholder="Background Color" />
+          <input class="input" type="text" name="panelcolor" placeholder="Panel Color" />
+        </div>
+
+        <input class="input" type="text" name="textcolor" placeholder="Text Color" />
+          <button class="btn">Create New Product</button>
+      </div>
+       </form>
+    </div>
+    
+  </div>
+
+
+
+  <script>
+  function showFileName(input) {
+    const fileName = input.files.length
+      ? input.files[0].name
+      : 'No file chosen';
+
+    input.closest('.image-row')
+         .querySelector('.file-name')
+         .textContent = fileName;
+  }
+</script>
+
+
+</body>
+</html>

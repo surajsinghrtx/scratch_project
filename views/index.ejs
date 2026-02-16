@@ -1,0 +1,904 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scratch – Login & Register</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+ .brand-header {
+  width: 100%;
+  text-align: center;
+  padding: 32px 0 10px;
+
+    opacity: 0;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.top-brand {
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  background: linear-gradient(
+    135deg,
+    #020202bc,
+    #e1dede,
+    #edf0f1
+
+    
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 2px 0 rgba(0,0,0,0.15),
+    0 6px 12px rgba(99,102,241,0.45),
+    0 12px 28px rgba(59,130,246,0.35);
+
+  user-select: none;
+
+    opacity: 0;
+  animation: fadeInDown 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+
+
+
+   body {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #22bcd7, #e030b7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+
+    @keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+    /* FLASH */
+    .flash-error {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #dc2626;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 500;
+      z-index: 9999;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      justify-content: space-between;
+      padding: 60px 80px;
+      gap: 80px;
+       margin-top: 40px;
+
+        opacity: 0;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.5s;
+    }
+
+    .left {
+      width: 45%;
+      background: #ffffff;
+      padding: 48px;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+
+       opacity: 0;
+  animation: fadeInLeft 1s ease forwards;
+  animation-delay: 0.7s;
+    }
+      .right {
+      width: 45%;
+      background: #ffffff;
+      padding: 48px;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+
+       opacity: 0;
+  animation: fadeInRight 1s ease forwards;
+  animation-delay: 0.9s;
+    }
+
+    /* LOGO */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #6366f1, #3b82f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 22px;
+      box-shadow: 0 8px 20px rgba(99,102,241,0.4);
+    }
+
+    .logo-text {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    h1 span {
+      color: #6366f1;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .sub {
+      font-size: 17px;
+      color: #555;
+      margin-bottom: 28px;
+    }
+
+    input {
+      width: 100%;
+      height: 50px;
+      background: #f3f4f6;
+      border: none;
+      border-radius: 10px;
+      padding: 0 18px;
+      font-size: 15px;
+      margin-bottom: 18px;
+      outline: none;
+      transition: box-shadow 0.2s ease;
+    }
+
+    input:focus {
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.3);
+    }
+
+    button {
+      height: 46px;
+      padding: 0 34px;
+      background: linear-gradient(135deg, #6366f1, #3b82f6);
+      border: none;
+      border-radius: 24px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 10px 30px rgba(59,130,246,0.35);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(59,130,246,0.45);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        padding: 40px;
+      }
+
+      .left, .right {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="brand-header">
+  <div class="top-brand">Scratch</div>
+</header>
+
+
+  <% if (error.length > 0) { %>
+    <div class="flash-error">
+      <%= error %>
+    </div>
+  <% } %>
+
+  <div class="container">-->
+
+    <!-- REGISTER 
+    <div class="left">
+      <div class="logo">
+        <div class="logo-icon">S</div>
+        <div class="logo-text">Scratch</div>
+      </div>
+
+      <h1>welcome to <span>Scratch</span></h1>
+      <div class="sub">create your account</div>
+
+      <form action="/users/register" method="POST">
+        <input type="text" name="fullname" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Create My Account</button>
+      </form>
+    </div>
+
+     LOGIN
+    <div class="right">
+      <h2>Login Your Account</h2>
+
+      <form action="/users/login" method="POST">
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+  </div>
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scratch – Login & Register</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 25%, #2d1b69 50%, #0f0f0f 100%);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #fff;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Flash Messages */
+    .flash-error {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ff4757;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 500;
+      z-index: 9999;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: fadeInDown 0.5s ease forwards;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    /* Main Container */
+    .main-container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      background: rgba(15, 15, 15, 0.85);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeInUp 0.8s ease forwards;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Brand Header Inside Container */
+    .brand-header {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9));
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+      background-size: cover;
+    }
+
+    .top-brand {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #ffffff, #a5b4fc);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-tagline {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 40px;
+      max-width: 300px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-features {
+      list-style: none;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-features li {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .brand-features i {
+      margin-right: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    /* Forms Container */
+    .forms-container {
+      flex: 1.2;
+      padding: 60px 50px;
+      background: rgba(20, 20, 20, 0.9);
+    }
+
+    .forms-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .forms-header h2 {
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .forms-header p {
+      color: #aaa;
+      font-size: 16px;
+    }
+
+    /* Form Toggle */
+    .form-toggle {
+      display: flex;
+      margin-bottom: 30px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 18px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 600;
+      color: #888;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      position: relative;
+    }
+
+    .toggle-btn.active {
+      color: #6a11cb;
+    }
+
+    .toggle-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* Form Styles */
+    .form {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .form.active {
+      display: block;
+    }
+
+    .input-group {
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 18px;
+      top: 17px;
+      color: #888;
+      font-size: 18px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 18px 18px 18px 52px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      font-size: 16px;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #6a11cb;
+      box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .input-group input::placeholder {
+      color: #888;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      color: #888;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .form-footer {
+      margin-top: 25px;
+      text-align: center;
+      color: #aaa;
+      font-size: 15px;
+    }
+
+    .form-footer a {
+      color: #6a11cb;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .form-footer a:hover {
+      color: #2575fc;
+      text-decoration: underline;
+    }
+
+    /* Submit Button */
+    button[type="submit"] {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 10px 25px rgba(106, 17, 203, 0.3);
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(106, 17, 203, 0.4);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(-1px);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .main-container {
+        flex-direction: column;
+        max-width: 600px;
+      }
+      
+      .brand-header {
+        padding: 40px 30px;
+      }
+      
+      .forms-container {
+        padding: 40px 30px;
+      }
+      
+      .top-brand {
+        font-size: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-container {
+        border-radius: 16px;
+      }
+      
+      .brand-header, .forms-container {
+        padding: 30px 20px;
+      }
+      
+      .forms-header h2 {
+        font-size: 26px;
+      }
+      
+      .toggle-btn {
+        padding: 15px;
+        font-size: 15px;
+      }
+      
+      .input-group input {
+        padding: 16px 16px 16px 48px;
+      }
+    }
+
+    /* E-commerce Logo */
+    .ecom-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+      gap: 15px;
+    }
+
+    .ecom-logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #ff6b6b, #ffa726);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+    }
+
+    .ecom-logo-text {
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff6b6b, #ffa726, #6a11cb);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+
+  <% if (error.length > 0) { %>
+    <div class="flash-error">
+      <%= error %>
+    </div>
+  <% } %>
+
+  <div class="main-container">
+    
+    <!-- Brand/Info Section -->
+    <div class="brand-header">
+      <div class="ecom-logo">
+        <div class="ecom-logo-icon">
+          <i class="fas fa-shopping-bag"></i>
+        </div>
+        <div class="ecom-logo-text">Scratch</div>
+      </div>
+      
+      <div class="top-brand">Premium E‑Commerce</div>
+      <p class="brand-tagline">Your one‑stop destination for premium shopping experience</p>
+      
+      <ul class="brand-features">
+        <li><i class="fas fa-shipping-fast"></i> Free shipping on orders over $50</li>
+        <li><i class="fas fa-shield-alt"></i> Secure & encrypted transactions</li>
+        <li><i class="fas fa-tags"></i> Exclusive member discounts</li>
+        <li><i class="fas fa-headset"></i> 24/7 customer support</li>
+        <li><i class="fas fa-undo"></i> Easy returns & exchanges</li>
+      </ul>
+    </div>
+    
+    <!-- Forms Section -->
+    <div class="forms-container">
+      <div class="forms-header">
+        <h2>Welcome to Scratch</h2>
+        <p>Login or create your account to start shopping</p>
+      </div>
+      
+      <div class="form-toggle">
+        <div class="toggle-btn active" id="login-toggle">Login</div>
+        <div class="toggle-btn" id="register-toggle">Register</div>
+      </div>
+      
+      <!-- Login Form -->
+      <form class="form active" id="login-form" action="/users/login" method="POST">
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" placeholder="Email" required />
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" name="password" placeholder="Password" required id="login-password" />
+          <span class="password-toggle" id="login-password-toggle">
+            <i class="fas fa-eye"></i>
+          </span>
+        </div>
+        
+        <button type="submit">Login to Your Account</button>
+        
+        <div class="form-footer">
+          Don't have an account? <a href="#" id="switch-to-register">Register here</a>
+        </div>
+      </form>
+      
+      <!-- Register Form -->
+      <form class="form" id="register-form" action="/users/register" method="POST">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" name="fullname" placeholder="Full Name" required />
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" placeholder="Email" required />
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" name="password" placeholder="Password" required id="register-password" />
+          <span class="password-toggle" id="register-password-toggle">
+            <i class="fas fa-eye"></i>
+          </span>
+        </div>
+        
+        <button type="submit">Create My Account</button>
+        
+        <div class="form-footer">
+          Already have an account? <a href="#" id="switch-to-login">Login here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Toggle between Login and Register forms
+    const loginToggle = document.getElementById('login-toggle');
+    const registerToggle = document.getElementById('register-toggle');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const switchToRegister = document.getElementById('switch-to-register');
+    const switchToLogin = document.getElementById('switch-to-login');
+    
+    loginToggle.addEventListener('click', () => {
+      loginToggle.classList.add('active');
+      registerToggle.classList.remove('active');
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+    });
+    
+    registerToggle.addEventListener('click', () => {
+      registerToggle.classList.add('active');
+      loginToggle.classList.remove('active');
+      registerForm.classList.add('active');
+      loginForm.classList.remove('active');
+    });
+    
+    switchToRegister.addEventListener('click', (e) => {
+      e.preventDefault();
+      registerToggle.click();
+    });
+    
+    switchToLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginToggle.click();
+    });
+    
+    // Password visibility toggle
+    const loginPasswordToggle = document.getElementById('login-password-toggle');
+    const loginPasswordInput = document.getElementById('login-password');
+    const registerPasswordToggle = document.getElementById('register-password-toggle');
+    const registerPasswordInput = document.getElementById('register-password');
+    
+    loginPasswordToggle.addEventListener('click', () => {
+      const type = loginPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      loginPasswordInput.setAttribute('type', type);
+      loginPasswordToggle.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    });
+    
+    registerPasswordToggle.addEventListener('click', () => {
+      const type = registerPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      registerPasswordInput.setAttribute('type', type);
+      registerPasswordToggle.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    });
+    
+    // Form validation (client-side enhancement)
+    const loginFormElement = document.getElementById('login-form');
+    const registerFormElement = document.getElementById('register-form');
+    
+    loginFormElement.addEventListener('submit', function(e) {
+      const email = this.querySelector('input[name="email"]');
+      const password = this.querySelector('input[name="password"]');
+      
+      if (!email.value.trim()) {
+        e.preventDefault();
+        alert('Please enter your email');
+        email.focus();
+        return;
+      }
+      
+      if (!password.value.trim()) {
+        e.preventDefault();
+        alert('Please enter your password');
+        password.focus();
+        return;
+      }
+    });
+    
+    registerFormElement.addEventListener('submit', function(e) {
+      const fullname = this.querySelector('input[name="fullname"]');
+      const email = this.querySelector('input[name="email"]');
+      const password = this.querySelector('input[name="password"]');
+      
+      if (!fullname.value.trim()) {
+        e.preventDefault();
+        alert('Please enter your full name');
+        fullname.focus();
+        return;
+      }
+      
+      if (!email.value.trim()) {
+        e.preventDefault();
+        alert('Please enter your email');
+        email.focus();
+        return;
+      }
+      
+      if (!password.value.trim() || password.value.length < 6) {
+        e.preventDefault();
+        alert('Please enter a password with at least 6 characters');
+        password.focus();
+        return;
+      }
+    });
+    
+    // Auto-hide flash messages after 5 seconds
+    setTimeout(() => {
+      const flashError = document.querySelector('.flash-error');
+      if (flashError) {
+        flashError.style.transition = 'opacity 0.5s ease';
+        flashError.style.opacity = '0';
+        setTimeout(() => {
+          flashError.remove();
+        }, 500);
+      }
+    }, 5000);
+  </script>
+</body>
+</html>
