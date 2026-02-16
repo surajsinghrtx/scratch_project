@@ -45,5 +45,8 @@ app.use('/users',usersRouter);
 app.use('/products',productsRouter);
 app.use('/',index);
 
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
