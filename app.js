@@ -39,6 +39,12 @@ expressSession({
 );
 app.use(flash());
 
+
+
+const checkDbConnection = require('./middlewares/checkDbConnection.js');
+app.use(checkDbConnection); // This will check DB state for every request
+
+
 //sending on routers
 app.use('/owners',ownersRouter);
 app.use('/users',usersRouter);
